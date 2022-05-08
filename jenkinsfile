@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Initiate') {
+            steps {
+                echo 'Project is initiated'
+            }
+        }
+        
+         stage('Dev') {
+            steps {
+                build quietPeriod: 5, job: 'sampleDevJob'
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                build quietPeriod: 5, job: 'sampleTestJob'
+            }
+        }
+        stage('UAT') {
+            steps {
+                build quietPeriod: 5, job: 'sampleJob'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deployed to prod'
+            }
+        }
+         stage('Close') {
+            steps {
+                echo 'Project is closed now'
+            }
+        }
+    }
+}
